@@ -1,0 +1,5 @@
+{
+  "CODEBOTS_SERVICE_URL": "https://localhost:4012/api",
+  "CODEBOTS_SOCKET_URL": "http://localhost:5100",
+  "HOST": "https://localhost:4011"
+}

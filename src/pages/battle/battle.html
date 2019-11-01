@@ -1,0 +1,114 @@
+<div id="battle-page">
+
+  <div id="username-chooser" ng-show="status == 'username'">
+    <div class="flex-row spaced tiles-row">
+      <div class="flex-cell choice-tile">
+        <h2>Username</h2>
+        <div><input type="text" maxlength="20" ng-model="username" class="text-center"></div>
+        <div class="gap"><button ng-click="setUsername()">Play</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="room-chooser" ng-show="status == 'choose'">
+    <div class="flex-row spaced tiles-row">
+      <div class="flex-cell choice-tile text-center">
+        <h2>Create a room</h2>
+        <button ng-click="createRoom()">Create</button>
+      </div>
+      <div class="flex-cell choice-tile text-center">
+        <h2>Join a room</h2>
+        <div><input type="text" maxlength="6" ng-model="roomGuid" class="text-center"></div>
+        <div class="gap"><button ng-click="joinRoom()">Join</button></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="battle-view" class="content-fill-height" ng-show="status == 'prepare' || status == 'battle'">
+    <div class="flex-row">
+      <div class="flex-cell" id="arena-cell">
+        <canvas id="arena"></canvas>
+      </div>
+      <div class="flex-cell" id="player-cell">
+
+        <div class="flex-column">
+          <div class="flex-cell">
+            <h1>Room {{ roomGuid }}</h1>
+
+            <h2>Players</h2>
+            <div ng-repeat="player in players">
+              <div class="flex-row mini-spaced vertical-center">
+                <div class="flex-cell">
+                  {{ player.username }}
+                </div>
+                <div class="flex-cell text-right" ng-if="player.bot">
+                  {{ player.bot.name }}
+                </div>
+                <div class="flex-cell fixed" ng-if="player.id == me.id">
+                  <button class="sm" ng-click="toggleEditScript()">Add script</button>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex-row mini-spaced vertical-center">
+                <div class="flex-cell">
+                </div>
+                <div class="flex-cell fixed">
+                  <button class="sm" ng-click="toggleCmp()">Add cmp</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="breathe" ng-show="status == 'prepare'">
+              Waiting for players to join...
+            </div>
+
+            <div class="breathe text-center">
+              <button ng-click="startMatch()" ng-show="canStartMatch()">Start Match</button>
+              <button ng-click="stopMatch()" ng-show="canStopMatch()">Stop Match</button>
+            </div>
+          </div>
+          <div class="flex-cell fixed20" id="chat-window">
+            <div ng-repeat="msg in messages" class="chat-message">
+              {{ msg }}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="shadow" ng-show="isAddingCmp" ng-class="{ 'open': isAddingCmp, 'closed': isAddingCmp === false }" ng-click="toggleCmp()"></div>
+  <div id="cmp-chooser" ng-show="isAddingCmp" ng-class="{ 'open': isAddingCmp, 'closed': isAddingCmp === false }">
+    <h2>Choose a computer bot to battle</h2>
+    <div ng-repeat="cmp in cmpBots">
+      <div class="flex-row mini-spaced vertical-center">
+        <div class="flex-cell text-left">
+          {{ cmp.botName }}
+        </div>
+        <div class="flex-cell fixed">
+          <button class="sm" ng-click="addCmp(cmp)">Choose</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shadow" ng-show="isEditingScript" ng-class="{ 'open': isEditingScript, 'closed': isEditingScript === false }" ng-click="toggleEditScript()"></div>
+  <div id="script-editor" ng-show="isEditingScript" ng-class="{ 'open': isEditingScript, 'closed': isEditingScript === false }">
+    <label>Bot name</label>
+    <input type="text" ng-model="botName">
+
+    <div class="gap" id="script-container">
+      <label>Javascript</label>
+      <textarea ng-model="botScript"></textarea>
+      <div class="text-center">
+        <button ng-click="saveScript()">Save</button>
+        <button class="cancel" ng-click="toggleEditScript()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+</div>
