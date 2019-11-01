@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const url = require('url');
 const http = require('http');
 const https = require('https');
