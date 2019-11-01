@@ -1,0 +1,11 @@
+{
+  "env": {
+    "NODE_ENV": "production"
+  },
+
+  "server": {
+    "hostname": "localhost",
+    "port": 4011,
+    "protocol": "http:"
+  }
+}
