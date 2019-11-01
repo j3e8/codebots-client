@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var sass = require('gulp-sass');
