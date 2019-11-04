@@ -1,0 +1,21 @@
+.dialog-box {
+  position: fixed;
+  z-index: 10;
+  top: 20px;
+  left: 50%;
+  margin-left: -250px;
+  width: 500px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.shadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  background-color: rgba(0, 0, 0, 0.85);
+}

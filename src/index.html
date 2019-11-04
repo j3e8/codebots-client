@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html>
   <head>
-    <title>Codebots</title>
-    <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Krona+One|Rajdhani" rel="stylesheet">
-    <script type="text/javascript" src="/assets/js/socket.io.dev.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="/assets/js/camo.js"></script>
-    <link rel="stylesheet" type="text/css" href="app.css">
+
+    <title>Codebots</title>
+    <script type="text/javascript" src="bundle-main.js"></script>
+    <script type="text/javascript" src="bundle-styles.js"></script>
+    <script type="text/javascript" src="/www/js/camo.js"></script>
   </head>
   <body>
-    <main ng-view></main>
+    <main id="react-container"></main>
   </body>
 </html>

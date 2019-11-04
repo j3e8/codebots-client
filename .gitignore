@@ -1,3 +1,13 @@
 .DS_Store
-node_modules/
+node_modules
+config/webpack.json
+config/.client
+!config/*.example
+!config/0.json
+www/bundle*.js
+www/bundle*.css
+www/bundle*.map
+npm-debug.log
 .env
+www/env.js
+.idea

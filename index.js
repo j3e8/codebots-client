@@ -7,28 +7,16 @@ const fs = require('fs');
 
 const serverConfig = config.get("server");
 
-app.get('/', function(req, res) {
-  res.sendFile('src/index.html', { root: process.cwd() });
-});
-
-app.get('/app.js', function(req, res) {
-  res.sendFile('www/app.js', { root: process.cwd() });
-});
-
-app.get('/app.css', function(req, res) {
-  res.sendFile('www/app.css', { root: process.cwd() });
-});
-
-app.get('/assets/*', function(req, res) {
+app.get('/bundle*.js', function(req, res) {
   res.sendFile('www' + req.url, { root: process.cwd() });
 });
 
-app.get('/components/*', function(req, res) {
-  res.sendFile('src' + req.url, { root: process.cwd() });
+app.get('/bundle*.css', function(req, res) {
+  res.sendFile('www' + req.url, { root: process.cwd() });
 });
 
-app.get('/pages/*', function(req, res) {
-  res.sendFile('src' + req.url, { root: process.cwd() });
+app.get('/www/*', function(req, res) {
+  res.sendFile(req.url, { root: process.cwd() });
 });
 
 app.get('/*', function(req, res) {
