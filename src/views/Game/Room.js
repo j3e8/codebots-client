@@ -69,7 +69,7 @@ class Room extends React.Component {
   onMemberJoined = (msg) => {
     this.setState({
       room: {
-        isRoomOwner: msg.owner.id === this.state.room.me.id,
+        ...this.state.room,
         players: msg.players,
       },
     });
@@ -79,7 +79,8 @@ class Room extends React.Component {
   onMemberLeft = (msg) => {
     this.setState({
       room: {
-        isRoomOwner: msg.owner.id === this.state.room.me.id,
+        ...this.state.room,
+        isRoomOwner: msg.owner.id === this.state.room.me.id, // you may have become the new room owner
         players: msg.players,
       },
     });

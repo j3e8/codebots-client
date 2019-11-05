@@ -32,7 +32,7 @@ class Game extends React.Component {
     this.socket.removeListener('joinRoomSuccess', this.onJoinRoomSuccess);
   }
 
-  handleInputChange(evt) {
+  handleInputChange= (evt) => {
     this.setState({
       [evt.target.name]: evt.target.value,
     });
@@ -57,7 +57,7 @@ class Game extends React.Component {
 
   joinRoom = () => {
     console.log('joinRoom', { guid: this.state.roomGuid });
-    socket.emit('joinRoom', { guid: this.state.roomGuid });
+    this.socket.emit('joinRoom', { guid: this.state.roomGuid });
   }
 
   onSocketConnect = (msg) => {
@@ -175,6 +175,7 @@ class Game extends React.Component {
       status: GameStatuses.PICK_USERNAME,
       messages: [],
       username,
+      roomGuid: '',
     };
   }
 }

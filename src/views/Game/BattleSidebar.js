@@ -111,15 +111,17 @@ class BattleSidebar extends React.Component {
             <h2>Players</h2>
             { this.props.room.players.map(player => this.renderPlayer(player)) }
 
-            <div>
-              <div className="flex-row mini-spaced vertical-center">
-                <div className="flex-cell">
-                </div>
-                <div className="flex-cell fixed">
-                  <button className="sm" onClick={ this.toggleCmp }>Add cmp</button>
+            { this.props.room.isRoomOwner && (
+              <div>
+                <div className="flex-row mini-spaced vertical-center">
+                  <div className="flex-cell">
+                  </div>
+                  <div className="flex-cell fixed">
+                    <button className="sm" onClick={ this.toggleCmp }>Add cmp</button>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) }
 
             { this.props.roomStatus === RoomStatuses.PREPARE &&
               <div className="breathe">
@@ -233,7 +235,7 @@ class BattleSidebar extends React.Component {
   }
 
   canStopMatch() {
-    return this.props.roomStatus === RoomStatuses.BATTLE;
+    return this.props.roomStatus === RoomStatuses.BATTLE && this.props.room.isRoomOwner;
   }
 
 }
