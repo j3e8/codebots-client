@@ -21,33 +21,6 @@ class BattleSidebar extends React.Component {
     this.state = {
       isAddingCmp: false,
       isEditingScript: false,
-
-      // temporary
-      botName: 'test',
-      botScript: `class RotateAndFire extends Bot {
-        constructor() {
-          super();
-        }
-
-        init() {
-          this.setColor(Bot.BLUE);
-        }
-
-        start() {
-          this.rotateAndFire();
-        }
-
-        rotateAndFire() {
-          console.log('rotateAndFire');
-          Promise.all([
-            this.reload(),
-            this.rotateBarrel(30)
-          ])
-          .then(() => this.fire())
-          .then(() => this.rotateAndFire())
-        }
-      }
-      `,
     };
   }
 
