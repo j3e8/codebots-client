@@ -10,6 +10,18 @@
       text-align: left;
       padding: 20px;
       background-color: rgba(255, 255, 255, 0.9);
+      .players-list {
+        &__player {
+          border-top: 1px solid #ccc;
+          padding: 6px 0;
+          &:last-child {
+            border-bottom: 1px solid #ccc;
+          }
+        }
+      }
+      .cmp-buttons {
+        padding: 6px 0;
+      }
     }
     #arena {
       margin: 0 auto;

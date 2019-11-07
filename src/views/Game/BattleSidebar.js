@@ -82,10 +82,12 @@ class BattleSidebar extends React.Component {
             <h1>Room { this.props.room.roomGuid }</h1>
 
             <h2>Players</h2>
-            { this.props.room.players.map(player => this.renderPlayer(player)) }
+            <div className="players-list">
+              { this.props.room.players.map(player => this.renderPlayer(player)) }
+            </div>
 
             { this.props.room.isRoomOwner && (
-              <div>
+              <div className="cmp-buttons">
                 <div className="flex-row mini-spaced vertical-center">
                   <div className="flex-cell">
                   </div>
@@ -118,7 +120,7 @@ class BattleSidebar extends React.Component {
 
   renderPlayer(player) {
     return (
-      <div key={ player.username }>
+      <div key={ player.username } className="players-list__player">
         <div className="flex-row mini-spaced vertical-center">
           <div className="flex-cell">
             { player.username }
@@ -131,7 +133,7 @@ class BattleSidebar extends React.Component {
           }
           { player.id == this.props.room.me.id
             ? <div className="flex-cell fixed">
-                <button className="sm" onClick={ this.toggleEditScript }>Add script</button>
+                <button className="sm" onClick={ this.toggleEditScript }>Edit script</button>
               </div>
             : null
           }
