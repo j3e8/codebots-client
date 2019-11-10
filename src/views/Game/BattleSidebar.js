@@ -21,6 +21,8 @@ class BattleSidebar extends React.Component {
     this.state = {
       isAddingCmp: false,
       isEditingScript: false,
+      botName: '',
+      botScript: '',
     };
   }
 
