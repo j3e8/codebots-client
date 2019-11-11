@@ -47,16 +47,20 @@ class BattleArena extends React.Component {
       return;
     }
     if (this.canvas.parentNode.offsetWidth < this.canvas.parentNode.offsetHeight) {
-      this.canvas.width = this.canvas.parentNode.offsetWidth * this.pxratio;
-      this.canvas.height = this.canvas.width;
-      this.canvas.style.width = Math.floor(this.canvas.parentNode.offsetWidth) + "px";
-      this.canvas.style.height = Math.floor(this.canvas.parentNode.offsetWidth) + "px";
+      const w = this.canvas.parentNode.offsetWidth;
+      this.canvas.width = w * this.pxratio;
+      this.canvas.height = w;
+      this.canvas.style.width = Math.floor(w) + "px";
+      this.canvas.style.height = Math.floor(w) + "px";
+      console.log(`width: ${w}`);
     }
     else {
-      this.canvas.height = this.canvas.parentNode.offsetHeight * this.pxratio;
-      this.canvas.width = this.canvas.height;
-      this.canvas.style.height = Math.floor(this.canvas.parentNode.offsetHeight) + "px";
-      this.canvas.style.width = Math.floor(this.canvas.parentNode.offsetHeight) + "px";
+      const h = this.canvas.parentNode.offsetHeight;
+      this.canvas.height = h * this.pxratio;
+      this.canvas.width = h * this.pxratio;
+      this.canvas.style.height = Math.floor(h) + "px";
+      this.canvas.style.width = Math.floor(h) + "px";
+      console.log(`width: ${h}`);
     }
   }
 
@@ -79,7 +83,7 @@ class BattleArena extends React.Component {
     }
     const ctx = this.canvas.getContext("2d");
     ctx.save();
-    // ctx.scale(pxratio, pxratio);
+    ctx.scale(pxratio, pxratio);
 
     this.clearArena();
 
