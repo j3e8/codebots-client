@@ -47,20 +47,22 @@ class BattleArena extends React.Component {
       return;
     }
     if (this.canvas.parentNode.offsetWidth < this.canvas.parentNode.offsetHeight) {
-      const w = this.canvas.parentNode.offsetWidth;
-      this.canvas.width = w * this.pxratio;
-      this.canvas.height = w;
-      this.canvas.style.width = Math.floor(w) + "px";
-      this.canvas.style.height = Math.floor(w) + "px";
-      console.log(`width: ${w}`);
+      this.width = this.canvas.parentNode.offsetWidth;
+      this.height = this.width;
+      this.canvas.width = this.width * this.pxratio;
+      this.canvas.height = this.width;
+      this.canvas.style.width = Math.floor(this.width) + "px";
+      this.canvas.style.height = Math.floor(this.width) + "px";
+      console.log(`width: ${this.width}`);
     }
     else {
-      const h = this.canvas.parentNode.offsetHeight;
-      this.canvas.height = h * this.pxratio;
-      this.canvas.width = h * this.pxratio;
-      this.canvas.style.height = Math.floor(h) + "px";
-      this.canvas.style.width = Math.floor(h) + "px";
-      console.log(`width: ${h}`);
+      this.height = this.canvas.parentNode.offsetHeight;
+      this.width = this.height;
+      this.canvas.height = this.height * this.pxratio;
+      this.canvas.width = this.height * this.pxratio;
+      this.canvas.style.height = Math.floor(this.height) + "px";
+      this.canvas.style.width = Math.floor(this.height) + "px";
+      console.log(`width: ${this.height}`);
     }
   }
 
@@ -70,10 +72,10 @@ class BattleArena extends React.Component {
     }
     const ctx = this.canvas.getContext("2d");
     ctx.save();
-    // ctx.scale(pxratio, pxratio);
+    ctx.scale(this.pxratio, this.pxratio);
 
     ctx.fillStyle = "#c1b49a";
-    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.fillRect(0, 0, this.width, this.height);
     ctx.restore();
   }
 
@@ -83,11 +85,11 @@ class BattleArena extends React.Component {
     }
     const ctx = this.canvas.getContext("2d");
     ctx.save();
-    ctx.scale(pxratio, pxratio);
+    ctx.scale(this.pxratio, this.pxratio);
 
     this.clearArena();
 
-    const scale = this.canvas.width / match.arena.width; // px per m
+    const scale = this.width / match.arena.width; // px per m
 
     match.bots.forEach((bot) => {
       this.renderBot(ctx, bot, scale);
