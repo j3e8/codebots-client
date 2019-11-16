@@ -7,3 +7,115 @@
 .text-right {
   text-align: right;
 }
+
+.p {
+  &t {
+    &-small {
+      padding-top: 0.8em;
+    }
+    &-medium {
+      padding-top: 1em;
+    }
+    &-large {
+      padding-top: 1.5em;
+    }
+  }
+  &r {
+    &-small {
+      padding-right: 0.8em;
+    }
+    &-medium {
+      padding-right: 1em;
+    }
+    &-large {
+      padding-right: 1.5em;
+    }
+  }
+  &b {
+    &-small {
+      padding-bottom: 0.8em;
+    }
+    &-medium {
+      padding-bottom: 1em;
+    }
+    &-large {
+      padding-bottom: 1.5em;
+    }
+  }
+  &l {
+    &-small {
+      padding-left: 0.8em;
+    }
+    &-medium {
+      padding-left: 1em;
+    }
+    &-large {
+      padding-left: 1.5em;
+    }
+  }
+  &-small {
+    padding: 0.8em;
+  }
+  &-medium {
+    padding: 1em;
+  }
+  &-large {
+    padding: 1.5em;
+  }
+}
+
+.m {
+  &t {
+    &-small {
+      margin-top: 0.8em;
+    }
+    &-medium {
+      margin-top: 1em;
+    }
+    &-large {
+      margin-top: 1.5em;
+    }
+  }
+  &r {
+    &-small {
+      margin-right: 0.8em;
+    }
+    &-medium {
+      margin-right: 1em;
+    }
+    &-large {
+      margin-right: 1.5em;
+    }
+  }
+  &b {
+    &-small {
+      margin-bottom: 0.8em;
+    }
+    &-medium {
+      margin-bottom: 1em;
+    }
+    &-large {
+      margin-bottom: 1.5em;
+    }
+  }
+  &l {
+    &-small {
+      margin-left: 0.8em;
+    }
+    &-medium {
+      margin-left: 1em;
+    }
+    &-large {
+      margin-left: 1.5em;
+    }
+  }
+  &-small {
+    margin: 0.8em;
+  }
+  &-medium {
+    margin: 1em;
+  }
+  &-large {
+    margin: 1.5em;
+  }
+}

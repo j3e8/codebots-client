@@ -4,6 +4,7 @@ import BattleArena from './BattleArena';
 import BattleSidebar from './BattleSidebar';
 import { RoomPropType } from '../../helpers/commonPropTypes';
 import RoomStatuses from '../../helpers/RoomStatuses';
+import Modal from '../../components/Modal';
 
 class Room extends React.Component {
   static propTypes = {
@@ -106,8 +107,42 @@ class Room extends React.Component {
             <BattleSidebar socket={ this.props.socket } room={ this.state.room } roomStatus={ this.state.status } />
           </div>
         </div>
+        { this.renderResults() }
       </div>
     );
+  }
+
+  renderResults() {
+    if (!this.state.results) {
+      return null;
+    }
+    if (this.state.results.status === 'canceled') {
+      return (
+        <Modal onCancel={ this.clearResults }>
+          <h2>Match Canceled</h2>
+
+          <div className="text-center pt-large">
+            <button onClick={ this.clearResults }>Okay</button>
+          </div>
+        </Modal>
+      );
+    }
+    return (
+      <Modal onCancel={ this.clearResults }>
+        <h2>Results</h2>
+        Winner: { this.state.results.winner.name }
+
+        <div className="text-center pt-large">
+          <button onClick={ this.clearResults }>Okay</button>
+        </div>
+      </Modal>
+    );
+  }
+
+  clearResults = () => {
+    this.setState({
+      results: undefined,
+    });
   }
 }
 

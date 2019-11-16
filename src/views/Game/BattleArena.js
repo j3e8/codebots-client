@@ -140,6 +140,16 @@ class BattleArena extends React.Component {
     ctx.fillStyle = "#5F9F53";
     ctx.fillRect(-HP_WIDTH / 2, bot.height * scale / 2 + PAD, HP_WIDTH * pctHp, HP_HEIGHT);
     ctx.restore();
+
+    // name
+    ctx.save();
+    ctx.translate(bot.location.x * scale, bot.location.y * scale);
+    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+    ctx.font = "11px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(bot.name, 0, -(bot.height * scale / 2 + PAD));
+    ctx.restore();
   }
 
   renderBullet = (ctx, bullet, scale) => {

@@ -29,6 +29,11 @@ a.button {
     background-color: #eaeaea;
     color: #888;
   }
+  & + input[type=button],
+  & + button,
+  & + a.button {
+    margin-left: 0.6em;
+  }
 }
 
 input[type=text],
