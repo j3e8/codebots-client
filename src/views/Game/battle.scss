@@ -78,4 +78,25 @@
       padding: 3px 0;
     }
   }
+
+  .documentation {
+    height: 3em;
+    padding: 1em;
+    background-color: rgba(#896D50, 0.7);
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 2px rgba(0, 0, 0, 0.3);
+    a {
+      color: #fff;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
 }

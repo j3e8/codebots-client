@@ -91,11 +91,12 @@ class BattleSidebar extends React.Component {
             { this.props.room.isRoomOwner && (
               <div className="cmp-buttons">
                 <div className="flex-row mini-spaced vertical-center">
-                  <div className="flex-cell">
-                  </div>
-                  <div className="flex-cell fixed">
-                    <button className="sm" onClick={ this.toggleCmp }>Add cmp</button>
-                  </div>
+                  <div className="flex-cell"></div>
+                  { this.props.roomStatus === RoomStatuses.PREPARE &&
+                    <div className="flex-cell fixed">
+                      <button className="sm" onClick={ this.toggleCmp }>Add cmp</button>
+                    </div>
+                  }
                 </div>
               </div>
             ) }
@@ -133,7 +134,7 @@ class BattleSidebar extends React.Component {
               </div>
             : null
           }
-          { player.id == this.props.room.me.id
+          { player.id == this.props.room.me.id && this.props.roomStatus === RoomStatuses.PREPARE
             ? <div className="flex-cell fixed">
                 <button className="sm" onClick={ this.toggleEditScript }>Edit script</button>
               </div>

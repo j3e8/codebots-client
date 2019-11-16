@@ -108,6 +108,7 @@ class Game extends React.Component {
       <div id="battle-page">
         { this.renderUsernameInput() }
         { this.renderRoomChooser() }
+        { this.renderDocumentation() }
         { this.renderRoom() }
       </div>
     );
@@ -151,6 +152,17 @@ class Game extends React.Component {
         </div>
       </div>
     );
+  }
+
+  renderDocumentation() {
+    if (this.state.status === GameStatuses.IN_ROOM) {
+      return null;
+    }
+    return (
+      <div className="documentation">
+        For documentation, please visit the Github Wiki at <a href="https://github.com/j3e8/codebots-client/wiki" target="_blank">https://github.com/j3e8/codebots-client/wiki</a>
+      </div>
+    )
   }
 
   renderRoom() {
