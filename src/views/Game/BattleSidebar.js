@@ -22,7 +22,15 @@ class BattleSidebar extends React.Component {
       isAddingCmp: false,
       isEditingScript: false,
       botName: '',
-      botScript: '',
+      botScript: `class MyBot extends Bot {
+  init() {
+    this.setColor(Bot.BLUE);
+  }
+
+  start() {
+    // Do something
+  }
+}`,
     };
   }
 
