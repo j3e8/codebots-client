@@ -47,6 +47,37 @@ const ComputerBots = [
       }
     }`
   },
+  {
+    botName: 'Random Bot',
+    botScript: `class RandomBot extends Bot {
+
+      init(id, name) {
+        this.setColor(Bot.RED);
+      }
+    
+      start() {
+        this.move()
+        this.rotate()
+        this.spitFire()
+      }
+    
+      async spitFire(){
+        await this.reload()
+        await this.fire()
+        this.spitFire()
+      }
+    
+      async rotate(){
+        await this.rotateTo(Math.random()*360)
+        this.rotate()
+      }
+    
+      async move(){
+        await this.forward(20)
+        this.move()
+      }
+    }`
+  },
 ];
 
 module.exports = ComputerBots;
