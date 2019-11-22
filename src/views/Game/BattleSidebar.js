@@ -13,6 +13,13 @@ class BattleSidebar extends React.Component {
     roomStatus: PropTypes.number.isRequired,
   }
 
+  static getDerivedStateFromProps(props, state) {
+    console.log('getDerivedStateFromProps', props, state);
+    return {
+      botName: state.botName || props.room.me.username || '',
+    }
+  }
+
   constructor(props) {
     super(props);
 
