@@ -99,4 +99,16 @@
       }
     }
   }
+
+  table.results-table {
+    width: 100%;
+    .results-table__rank {
+      font-size: 2em;
+    }
+    tr {
+      td {
+        border-top: 1px solid #ccc;
+      }
+    }
+  }
 }

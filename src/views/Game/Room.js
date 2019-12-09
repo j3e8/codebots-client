@@ -130,13 +130,42 @@ class Room extends React.Component {
     return (
       <Modal onCancel={ this.clearResults }>
         <h2>Results</h2>
-        Winner: { this.state.results.winner.name }
+        <table className="results-table">
+          <thead>
+            <tr>
+              <th className="text-left"></th>
+              <th className="text-left">Bot</th>
+              <th className="text-right">Kills</th>
+              <th className="text-right">Bullets Fired</th>
+              <th className="text-right">Hits</th>
+              <th className="text-right">Accuracy</th>
+              <th className="text-right">Killed By</th>
+            </tr>
+          </thead>
+          <tbody>
+            { this.state.results.rankings.map(bot => this.renderBotResultRow(bot)) }
+          </tbody>
+        </table>
 
         <div className="text-center pt-large">
           <button onClick={ this.clearResults }>Okay</button>
         </div>
       </Modal>
     );
+  }
+
+  renderBotResultRow(bot) {
+    return (
+      <tr key={ bot.id }>
+        <td className="text-left results-table__rank">{ bot.stats.rank }</td>
+        <td className="text-left results-table__name">{ bot.name }</td>
+        <td className="text-right results-table__kills">{ bot.stats.kills || 0 }</td>
+        <td className="text-right results-table__bullets-fired">{ bot.stats.bulletsFired || 0 }</td>
+        <td className="text-right results-table__hits">{ bot.stats.hits || 0 }</td>
+        <td className="text-right results-table__accuracy">{ bot.stats.bulletsFired ? `${(bot.stats.hits / bot.stats.bulletsFired * 100).toFixed(1)}%` : '-' }</td>
+        <td className="text-right results-table__killed-by">{ bot.stats.killer ? bot.stats.killer.name : '-' }</td>
+      </tr>
+    )
   }
 
   clearResults = () => {
