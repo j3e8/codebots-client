@@ -127,6 +127,10 @@ class Room extends React.Component {
         </Modal>
       );
     }
+
+    const rankings = this.state.results.rankings.slice(0);
+    rankings.sort((a, b) => a.stats.rank - b.stats.rank);
+
     return (
       <Modal onCancel={ this.clearResults }>
         <h2>Results</h2>
@@ -143,7 +147,7 @@ class Room extends React.Component {
             </tr>
           </thead>
           <tbody>
-            { this.state.results.rankings.map(bot => this.renderBotResultRow(bot)) }
+            { rankings.map(bot => this.renderBotResultRow(bot)) }
           </tbody>
         </table>
 
