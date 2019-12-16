@@ -39,7 +39,6 @@ class Room extends React.Component {
   }
 
   onMatchStart = (msg) => {
-    console.log('matchStarted', msg);
     this.setState({
       status: RoomStatuses.BATTLE,
       room: {
@@ -50,7 +49,6 @@ class Room extends React.Component {
   }
 
   onMatchEnd = (msg) => {
-    console.log('matchEnded', msg);
     this.setState({
       status: RoomStatuses.PREPARE,
       results: msg.results,
@@ -58,7 +56,6 @@ class Room extends React.Component {
   }
 
   onSelectBotSuccess = (msg) => {
-    console.log('selectBotSuccess', msg);
     this.setState({
       room: {
         ...this.state.room,
@@ -74,7 +71,6 @@ class Room extends React.Component {
         players: msg.players,
       },
     });
-    console.log('memberJoined', msg);
   }
 
   onMemberLeft = (msg) => {
@@ -85,7 +81,6 @@ class Room extends React.Component {
         players: msg.players,
       },
     });
-    console.log('memberLeft', msg);
   }
 
   onScriptError = (msg) => {

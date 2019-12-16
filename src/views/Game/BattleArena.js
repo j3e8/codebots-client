@@ -53,7 +53,6 @@ class BattleArena extends React.Component {
       this.canvas.height = this.width;
       this.canvas.style.width = Math.floor(this.width) + "px";
       this.canvas.style.height = Math.floor(this.width) + "px";
-      console.log(`width: ${this.width}`);
     }
     else {
       this.height = this.canvas.parentNode.offsetHeight;
@@ -62,7 +61,6 @@ class BattleArena extends React.Component {
       this.canvas.width = this.height * this.pxratio;
       this.canvas.style.height = Math.floor(this.height) + "px";
       this.canvas.style.width = Math.floor(this.height) + "px";
-      console.log(`width: ${this.height}`);
     }
   }
 
@@ -156,7 +154,6 @@ class BattleArena extends React.Component {
     if (!BulletImages.bullet.loaded) {
       return;
     }
-    // console.log('renderBullet', bullet.location.x * scale, bullet.location.y * scale, bullet.width * scale, bullet.height * scale);
     ctx.save();
     ctx.translate(bullet.location.x * scale, bullet.location.y * scale);
     ctx.drawImage(BulletImages.bullet.image, -bullet.width * scale / 2, -bullet.height * scale / 2, bullet.width * scale, bullet.height * scale);

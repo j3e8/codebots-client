@@ -51,26 +51,21 @@ class Game extends React.Component {
   }
 
   createRoom = () => {
-    console.log('createRoom');
     this.socket.emit('createRoom', { });
   }
 
   joinRoom = () => {
-    console.log('joinRoom', { guid: this.state.roomGuid });
     this.socket.emit('joinRoom', { guid: this.state.roomGuid });
   }
 
   onSocketConnect = (msg) => {
-    console.log('connection', msg);
   }
 
   onSocketDisconnect = (msg) => {
-    console.log('disconnected!', msg);
     this.setState(this.getInitialState());
   }
 
   onCreateRoom = (msg) => {
-    console.log('createRoom', msg);
     this.setState({
       status: GameStatuses.IN_ROOM,
       room: {
@@ -87,7 +82,6 @@ class Game extends React.Component {
       status: GameStatuses.HOST_OR_JOIN,
     });
     alert("Sorry, couldn't join that room", true);
-    console.log('joinRoomFail', msg);
   }
 
   onJoinRoomSuccess = (msg) => {
@@ -100,7 +94,6 @@ class Game extends React.Component {
         isRoomOwner: false,
       },
     });
-    console.log('joinRoomSuccess', msg);
   }
 
   render () {
