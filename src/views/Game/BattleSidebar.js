@@ -14,6 +14,7 @@ class BattleSidebar extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+    console.log('getDerivedStateFromProps', props, state);
     return {
       botName: state.botName || props.room.me.username || '',
     }
@@ -45,6 +46,7 @@ class BattleSidebar extends React.Component {
   }
 
   onBroadcast = (msg) => {
+    console.log('received broadcast', msg);
     this.setState({
       messages: [
         ...this.state.messages,
@@ -98,7 +100,7 @@ class BattleSidebar extends React.Component {
 
             <h2>Players</h2>
             <div className="players-list">
-              { this.props.room.players.map((player, i) => this.renderPlayer(player, i)) }
+              { this.props.room.players.map(player => this.renderPlayer(player)) }
             </div>
 
             { this.props.room.isRoomOwner && (
@@ -134,11 +136,11 @@ class BattleSidebar extends React.Component {
     );
   }
 
-  renderPlayer(player, index) {
+  renderPlayer(player) {
     return (
-      <div key={ index } className="players-list__player">
+      <div key={ player.username } className="players-list__player">
         <div className="flex-row mini-spaced vertical-center">
-          <div className="flex-cell">
+          <div className={`flex-cell ${player.bot && player.bot.seized ? 'error' : ''}`}>
             { player.username }
           </div>
           { player.bot
