@@ -1,6 +1,6 @@
 const BotImages = {};
 
-const colors = ['green','blue','red','gray','tan'];
+const colors = ['green','blue','red','gray','tan','orange','pink','purple'];
 colors.forEach(function(color) {
   BotImages[color] = {
     tank: {

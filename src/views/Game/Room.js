@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import BattleArena from './BattleArena';
 import BattleSidebar from './BattleSidebar';
 import { RoomPropType } from '../../helpers/commonPropTypes';
@@ -26,6 +27,7 @@ class Room extends React.Component {
     this.props.socket.on('memberJoined', this.onMemberJoined);
     this.props.socket.on('scriptLog', this.onScriptLog);
     this.props.socket.on('scriptError', this.onScriptError);
+    this.props.socket.on('status', this.onStatusUpdate);
   }
 
   componentWillUnmount() {
@@ -36,6 +38,7 @@ class Room extends React.Component {
     this.props.socket.removeListener('memberJoined', this.onMemberJoined);
     this.props.socket.removeListener('scriptLog', this.onScriptLog);
     this.props.socket.removeListener('scriptError', this.onScriptError);
+    this.props.socket.removeListener('status', this.onStatusUpdate);
   }
 
   onMatchStart = (msg) => {
@@ -89,6 +92,28 @@ class Room extends React.Component {
 
   onScriptLog = (msg) => {
     console.log('Script log:', msg.bot, ...msg.message);
+  }
+
+  onStatusUpdate = (match) => {
+    // We only care about status updates so we can make sure we're rendering the right color of tank for each player
+    const players = _.cloneDeep(this.state.room.players);
+
+    players.forEach((player) => {
+      const botFromMsg = match.bots.find(b => b.id === player.bot.id);
+      if (botFromMsg) {
+        player.bot.color = botFromMsg.color;
+        player.bot.alive = botFromMsg.alive;
+      }
+    });
+
+    if (!_.isEqual(this.state.room.players, players)) {
+      this.setState({
+        room: {
+          ...this.state.room,
+          players,
+        },
+      });
+    }
   }
 
   render() {

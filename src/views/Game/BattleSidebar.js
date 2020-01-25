@@ -5,6 +5,7 @@ import RoomStatuses from '../../helpers/RoomStatuses';
 import Drawer from '../../components/Drawer';
 import Modal from '../../components/Modal';
 import ComputerBots from '../../helpers/ComputerBots';
+import BotImages from '../../helpers/BotImages';
 
 class BattleSidebar extends React.Component {
   static propTypes = {
@@ -14,7 +15,6 @@ class BattleSidebar extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log('getDerivedStateFromProps', props, state);
     return {
       botName: state.botName || props.room.me.username || '',
     }
@@ -46,7 +46,6 @@ class BattleSidebar extends React.Component {
   }
 
   onBroadcast = (msg) => {
-    console.log('received broadcast', msg);
     this.setState({
       messages: [
         ...this.state.messages,
@@ -137,17 +136,27 @@ class BattleSidebar extends React.Component {
   }
 
   renderPlayer(player) {
+    const tankImage = player.bot && player.bot.alive !== false ? BotImages[player.bot.color].tank.image.src : BotImages.broken.tank.image.src;
+    const barrelImage = player.bot && player.bot.alive !== false ? BotImages[player.bot.color].barrel.image.src : BotImages.broken.barrel.image.src;
+
     return (
       <div key={ player.username } className="players-list__player">
         <div className="flex-row mini-spaced vertical-center">
+          { this.props.roomStatus === RoomStatuses.BATTLE && player.bot &&
+            <div className="flex-cell fixed">
+              <div className="players-list__player__tank">
+                <img src={ tankImage } />
+                <img src={ barrelImage } />
+              </div>
+            </div>
+          }
           <div className={`flex-cell ${player.bot && player.bot.seized ? 'error' : ''}`}>
             { player.username }
           </div>
-          { player.bot
-            ? <div className="flex-cell text-right">
-                { player.bot.name }
-              </div>
-            : null
+          { player.bot &&
+            <div className="flex-cell text-right">
+              { player.bot.name }
+            </div>
           }
           { player.id == this.props.room.me.id && this.props.roomStatus === RoomStatuses.PREPARE
             ? <div className="flex-cell fixed">

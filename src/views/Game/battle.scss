@@ -17,6 +17,28 @@
           &:last-child {
             border-bottom: 1px solid #ccc;
           }
+          &__tank {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            position: relative;
+            img {
+              position: absolute;
+              &:first-child {
+                width: 100%;
+                top: 0;
+              }
+              &:last-child {
+                top: 10px;
+                width: 150%;
+                left: -26%;
+              }
+            }
+          }
+          .error {
+            color: #a00000;
+            font-style: italic;
+          }
         }
       }
       .cmp-buttons {
