@@ -164,6 +164,7 @@ class Room extends React.Component {
               <th className="text-right">Hits</th>
               <th className="text-right">Accuracy</th>
               <th className="text-right">Killed By</th>
+              <th className="text-right">Points</th>
             </tr>
           </thead>
           <tbody>
@@ -188,6 +189,7 @@ class Room extends React.Component {
         <td className="text-right results-table__hits">{ bot.stats.hits || 0 }</td>
         <td className="text-right results-table__accuracy">{ bot.stats.bulletsFired ? `${(bot.stats.hits / bot.stats.bulletsFired * 100).toFixed(1)}%` : '-' }</td>
         <td className="text-right results-table__killed-by">{ bot.stats.killer ? bot.stats.killer.name : '-' }</td>
+        <td className="text-right results-table__killed-by">{ bot.stats.points }</td>
       </tr>
     )
   }
