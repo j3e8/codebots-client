@@ -17,5 +17,27 @@
   right: 0;
   bottom: 0;
   z-index: 9;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: #000;
+  transition: 500ms;
+
+  &.fade {
+    &-enter {
+      opacity: 0;
+    }
+    &-enter-active {
+      opacity: 0.85;
+    }
+    &-enter-done {
+      opacity: 0.85;
+    }
+    &-exit {
+      opacity: 0.85;
+    }
+    &-exit-active {
+      opacity: 0;
+    }
+    &-exit-done {
+      opacity: 0;
+    }
+  }
 }
