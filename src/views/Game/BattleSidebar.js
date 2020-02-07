@@ -7,16 +7,6 @@ import Modal from '../../components/Modal';
 import ComputerBots from '../../helpers/ComputerBots';
 import BotImages from '../../helpers/BotImages';
 
-const defaultScript = `class MyBot extends Bot {
-  init() {
-    this.setColor(Bot.BLUE);
-  }
-
-  start() {
-    // Do something
-  }
-}`;
-
 class BattleSidebar extends React.Component {
   static propTypes = {
     socket: PropTypes.object.isRequired,
@@ -35,15 +25,19 @@ class BattleSidebar extends React.Component {
 
     this.props.socket.on('broadcast', this.onBroadcast);
 
-    const savedScript = window.localStorage.getItem('script');
-    const isSaved = savedScript ? true : false;
-
     this.state = {
       isAddingCmp: false,
       isEditingScript: false,
       botName: '',
-      isSaved,
-      botScript: savedScript || defaultScript,
+      botScript: `class MyBot extends Bot {
+  init() {
+    this.setColor(Bot.BLUE);
+  }
+
+  start() {
+    // Do something
+  }
+}`,
     };
   }
 
@@ -72,11 +66,6 @@ class BattleSidebar extends React.Component {
   }
 
   saveScript = () => {
-    if (this.state.isSaved === true) {
-      window.localStorage.setItem('script', this.state.botScript);
-    } else {
-      window.localStorage.removeItem('script');
-    }
     this.props.socket.emit('selectBot', { name: this.state.botName, script: this.state.botScript });
     this.toggleEditScript();
   }
@@ -99,12 +88,6 @@ class BattleSidebar extends React.Component {
     this.setState({
       isEditingScript: !this.state.isEditingScript,
     })
-  }
-
-  toggleSavedState = () => {
-    this.setState({
-      isSaved: !this.state.isSaved,
-    });
   }
 
   render() {
@@ -225,23 +208,20 @@ class BattleSidebar extends React.Component {
   }
 
   renderBotScriptDrawer() {
+    if (!this.state.isEditingScript) {
+      return null;
+    }
     return (
-      <Drawer onCancel={ this.toggleEditScript } display={ this.state.isEditingScript }>
+      <Drawer onCancel={ this.toggleEditScript }>
         <label>Bot name</label>
         <input type="text" name="botName" value={ this.state.botName } onChange={ this.handleInputChange }/>
 
         <div className="gap" id="script-container">
           <label>Javascript</label>
           <textarea name="botScript" value={ this.state.botScript } onChange={ this.handleInputChange }></textarea>
-          <div className="flex-row">
-            <div className="flex-cell fixed">
-              <input id="save-in-browser" type="checkbox" value={ true } defaultChecked={ this.state.isSaved } onClick={ this.toggleSavedState } />
-              <label htmlFor="save-in-browser">Save in browser</label>
-            </div>
-            <div className="flex-cell text-center">
-              <button onClick={ this.saveScript }>Save</button>
-              <button className="cancel" onClick={ this.toggleEditScript }>Cancel</button>
-            </div>
+          <div className="text-center">
+            <button onClick={ this.saveScript }>Save</button>
+            <button className="cancel" onClick={ this.toggleEditScript }>Cancel</button>
           </div>
         </div>
       </Drawer>
