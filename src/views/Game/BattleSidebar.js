@@ -44,6 +44,7 @@ class BattleSidebar extends React.Component {
       botName: '',
       isSaved,
       botScript: savedScript || defaultScript,
+      messages: [],
     };
   }
 
