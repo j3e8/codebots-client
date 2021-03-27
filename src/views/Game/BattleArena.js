@@ -50,7 +50,7 @@ class BattleArena extends React.Component {
       this.width = this.canvas.parentNode.offsetWidth;
       this.height = this.width;
       this.canvas.width = this.width * this.pxratio;
-      this.canvas.height = this.width;
+      this.canvas.height = this.width * this.pxratio;
       this.canvas.style.width = Math.floor(this.width) + "px";
       this.canvas.style.height = Math.floor(this.width) + "px";
     }

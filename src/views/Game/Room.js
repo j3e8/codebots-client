@@ -99,6 +99,7 @@ class Room extends React.Component {
     const players = _.cloneDeep(this.state.room.players);
 
     players.forEach((player) => {
+      if (!player.bot) return;
       const botFromMsg = match.bots.find(b => b.id === player.bot.id);
       if (botFromMsg) {
         player.bot.color = botFromMsg.color;
