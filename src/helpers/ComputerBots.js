@@ -1,11 +1,7 @@
 const ComputerBots = [
   {
     botName: 'Sitting Duck',
-    botScript: `class SittingDuck extends Bot {
-      init() {
-        this.setColor(Bot.GREEN);
-      }
-    }`,
+    botScript: `class SittingDuck extends Bot {}`,
   },
   {
     botName: 'Turn and Shoot',
@@ -54,24 +50,24 @@ const ComputerBots = [
       init(id, name) {
         this.setColor(Bot.RED);
       }
-    
+
       start() {
         this.move()
         this.rotate()
         this.spitFire()
       }
-    
+
       async spitFire(){
         await this.reload()
         await this.fire()
         this.spitFire()
       }
-    
+
       async rotate(){
         await this.rotateTo(Math.random()*360)
         this.rotate()
       }
-    
+
       async move(){
         await this.forward(20)
         this.move()
