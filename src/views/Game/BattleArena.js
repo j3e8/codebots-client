@@ -110,7 +110,7 @@ class BattleArena extends React.Component {
     // tank
     ctx.save();
     ctx.translate(bot.location.x * scale, bot.location.y * scale);
-    ctx.rotate(bot.rotation);
+    ctx.rotate(bot.rotation / 180 * Math.PI);
       if (bot.alive) {
         ctx.drawImage(BotImages[bot.color].tank.image, -bot.width * scale / 2, -bot.height * scale / 2, bot.width * scale, bot.height * scale);
       }
@@ -119,7 +119,7 @@ class BattleArena extends React.Component {
       }
       // barrel
       ctx.save();
-      ctx.rotate(bot.barrel.rotation);
+      ctx.rotate(bot.barrel.rotation / 180 * Math.PI);
       if (bot.alive) {
         ctx.drawImage(BotImages[bot.color].barrel.image, -bot.barrel.width * scale / 2, -bot.barrel.height * scale / 2, bot.barrel.width * scale, bot.barrel.height * scale);
       }
