@@ -20,6 +20,7 @@ class Game extends React.Component {
     this.socket.on('createRoom', this.onCreateRoom);
     this.socket.on('joinRoomFail', this.onJoinRoomFail);
     this.socket.on('joinRoomSuccess', this.onJoinRoomSuccess);
+    this.socket.on('leftRoom', this.onLeaveRoomSuccess);
 
     this.state = this.getInitialState();
   }
@@ -30,6 +31,7 @@ class Game extends React.Component {
     this.socket.removeListener('createRoom', this.onCreateRoom);
     this.socket.removeListener('joinRoomFail', this.onJoinRoomFail);
     this.socket.removeListener('joinRoomSuccess', this.onJoinRoomSuccess);
+    this.socket.removeListener('leftRoom', this.onLeaveRoomSuccess);
   }
 
   handleInputChange= (evt) => {
@@ -93,6 +95,19 @@ class Game extends React.Component {
         players: msg.players,
         isRoomOwner: false,
       },
+    });
+  }
+
+  onLeaveRoom = () => {
+    console.log('leave the room, please');
+    this.socket.emit('leaveRoom', { guid: this.state.roomGuid });
+  }
+
+  onLeaveRoomSuccess = () => {
+    this.setState({
+      room: null,
+      roomGuid: '',
+      status: GameStatuses.HOST_OR_JOIN,
     });
   }
 
@@ -164,6 +179,7 @@ class Game extends React.Component {
     }
     return (
       <Room
+        onLeaveRoom={ this.onLeaveRoom }
         socket={ this.socket }
         room={ this.state.room }
       />

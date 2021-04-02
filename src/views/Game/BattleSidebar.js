@@ -19,6 +19,7 @@ const defaultScript = `class MyBot extends Bot {
 
 class BattleSidebar extends React.Component {
   static propTypes = {
+    onLeaveRoom: PropTypes.func.isRequired,
     socket: PropTypes.object.isRequired,
     room: RoomPropType,
     roomStatus: PropTypes.number.isRequired,
@@ -34,6 +35,7 @@ class BattleSidebar extends React.Component {
     super(props);
 
     this.props.socket.on('broadcast', this.onBroadcast);
+    this.props.socket.on('matchStarted', this.onMatchStart);
 
     const savedScript = window.localStorage.getItem('script');
     const isSaved = savedScript ? true : false;
@@ -50,6 +52,7 @@ class BattleSidebar extends React.Component {
 
   componentWillUnmount() {
     this.props.socket.removeListener('broadcast', this.onBroadcast);
+    this.props.socket.removeListener('matchStarted', this.onMatchStart);
   }
 
   onBroadcast = (msg) => {
@@ -58,6 +61,12 @@ class BattleSidebar extends React.Component {
         ...this.state.messages,
         msg.bot.name + ': ' + msg.message,
       ],
+    });
+  }
+
+  onMatchStart = () => {
+    this.setState({
+      message: []
     });
   }
 
@@ -145,6 +154,9 @@ class BattleSidebar extends React.Component {
             </div>
           </div>
           { this.renderChatWindow() }
+          <div className="flex-cell fixed">
+            <button className="sm" onClick={ this.props.onLeaveRoom }>Leave</button>
+          </div>
         </div>
 
         { this.renderBotChooserModal() }
@@ -192,12 +204,14 @@ class BattleSidebar extends React.Component {
       return null;
     }
     return(
-      <div className="flex-cell fixed20" id="chat-window">
-        { this.state.messages.map((msg, i) => (
-          <div className="chat-message" key={ i }>
-            { msg }
-          </div>
-        )) }
+      <div className="flex-cell fixed">
+        <div id="chat-window">
+          { this.state.messages.map((msg, i) => (
+            <div className="chat-message" key={ i }>
+              { msg }
+            </div>
+          )) }
+        </div>
       </div>
     );
   }

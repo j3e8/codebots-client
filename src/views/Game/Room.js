@@ -9,6 +9,7 @@ import Modal from '../../components/Modal';
 
 class Room extends React.Component {
   static propTypes = {
+    onLeaveRoom: PropTypes.func.isRequired,
     socket: PropTypes.object.isRequired,
     room: RoomPropType,
   }
@@ -125,7 +126,7 @@ class Room extends React.Component {
             <BattleArena socket={ this.props.socket } />
           </div>
           <div className="flex-cell" id="player-cell">
-            <BattleSidebar socket={ this.props.socket } room={ this.state.room } roomStatus={ this.state.status } />
+            <BattleSidebar socket={ this.props.socket } room={ this.state.room } roomStatus={ this.state.status } onLeaveRoom={ this.props.onLeaveRoom } />
           </div>
         </div>
         { this.renderResults() }
