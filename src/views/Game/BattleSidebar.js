@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { RoomPropType } from '../../helpers/commonPropTypes';
 import RoomStatuses from '../../helpers/RoomStatuses';
 import Drawer from '../../components/Drawer';
@@ -33,6 +34,8 @@ class BattleSidebar extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.botScriptInput = React.createRef();
 
     this.props.socket.on('broadcast', this.onBroadcast);
     this.props.socket.on('matchStarted', this.onMatchStart);
@@ -82,12 +85,19 @@ class BattleSidebar extends React.Component {
   }
 
   saveScript = () => {
+    const botScript = this.codeMirror.getValue();
+
     if (this.state.isSaved === true) {
-      window.localStorage.setItem('script', this.state.botScript);
+      window.localStorage.setItem('script', botScript);
     } else {
       window.localStorage.removeItem('script');
     }
-    this.props.socket.emit('selectBot', { name: this.state.botName, script: this.state.botScript });
+    this.props.socket.emit('selectBot', { name: this.state.botName, script: botScript });
+
+    this.setState({
+      botScript,
+    });
+
     this.toggleEditScript();
   }
 
@@ -108,7 +118,16 @@ class BattleSidebar extends React.Component {
   toggleEditScript = () => {
     this.setState({
       isEditingScript: !this.state.isEditingScript,
-    })
+    }, () => {
+      if (this.state.isEditingScript)  {
+        this.codeMirror = CodeMirror.fromTextArea(this.botScriptInput.current, {
+          lineNumbers: true,
+          mode: 'javascript',
+        });
+      } else {
+        this.codeMirror = null;
+      }
+    });
   }
 
   toggleSavedState = () => {
@@ -247,7 +266,13 @@ class BattleSidebar extends React.Component {
 
         <div className="gap" id="script-container">
           <label>Javascript</label>
-          <textarea name="botScript" value={ this.state.botScript } onChange={ this.handleInputChange }></textarea>
+          <div id="codemirror-container">
+            <textarea name="botScript"
+              style={{ display: 'none' }}
+              ref={ this.botScriptInput }
+              defaultValue={ this.state.botScript }
+            ></textarea>
+          </div>
           <div className="flex-row">
             <div className="flex-cell fixed">
               <input id="save-in-browser" type="checkbox" value={ true } defaultChecked={ this.state.isSaved } onClick={ this.toggleSavedState } />

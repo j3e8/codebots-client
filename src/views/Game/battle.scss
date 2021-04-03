@@ -81,10 +81,18 @@
 
   #script-container {
     height: calc(100% - 140px);
-    textarea {
-      width: 100%;
+    // textarea {
+    //   width: 100%;
+    //   height: 100%;
+    //   font-family: monospace;
+    // }
+
+    #codemirror-container {
       height: 100%;
-      font-family: monospace;
+      .CodeMirror {
+        height: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+      }
     }
   }
 
