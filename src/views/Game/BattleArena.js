@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BotImages from '../../helpers/BotImages';
 import BulletImages from '../../helpers/BulletImages';
+import MineImages from '../../helpers/MineImages';
 
 class BattleArena extends React.Component {
   static propTypes = {
@@ -89,6 +90,10 @@ class BattleArena extends React.Component {
 
     const scale = this.width / match.arena.width; // px per m
 
+    match.mines.forEach((mine) => {
+      this.renderMine(ctx, mine, scale);
+    });
+
     match.bots.forEach((bot) => {
       this.renderBot(ctx, bot, scale);
     });
@@ -157,6 +162,16 @@ class BattleArena extends React.Component {
     ctx.save();
     ctx.translate(bullet.location.x * scale, bullet.location.y * scale);
     ctx.drawImage(BulletImages.bullet.image, -bullet.width * scale / 2, -bullet.height * scale / 2, bullet.width * scale, bullet.height * scale);
+    ctx.restore();
+  }
+
+  renderMine = (ctx, mine, scale) => {
+    if (!MineImages.mine.loaded) {
+      return;
+    }
+    ctx.save();
+    ctx.translate(mine.location.x * scale, mine.location.y * scale);
+    ctx.drawImage(MineImages.mine.image, -mine.width * scale / 2, -mine.height * scale / 2, mine.width * scale, mine.height * scale);
     ctx.restore();
   }
 }

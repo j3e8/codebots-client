@@ -145,7 +145,7 @@ class BattleSidebar extends React.Component {
 
             <h2>Players</h2>
             <div className="players-list">
-              { this.props.room.players.map(player => this.renderPlayer(player)) }
+              { this.props.room.players.map((player, index) => this.renderPlayer(player)) }
             </div>
 
             { this.props.room.isRoomOwner && (
@@ -184,12 +184,12 @@ class BattleSidebar extends React.Component {
     );
   }
 
-  renderPlayer(player) {
+  renderPlayer(player, index) {
     const tankImage = player.bot && player.bot.alive !== false ? BotImages[player.bot.color].tank.image.src : BotImages.broken.tank.image.src;
     const barrelImage = player.bot && player.bot.alive !== false ? BotImages[player.bot.color].barrel.image.src : BotImages.broken.barrel.image.src;
 
     return (
-      <div key={ player.username } className="players-list__player">
+      <div key={ player.username + index } className="players-list__player">
         <div className="flex-row mini-spaced vertical-center">
           { this.props.roomStatus === RoomStatuses.BATTLE && player.bot &&
             <div className="flex-cell fixed">
