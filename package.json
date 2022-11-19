@@ -48,7 +48,7 @@
     "webpack-write-stats-plugin": "0.0.1"
   },
   "devDependencies": {
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.12"
   },
   "author": "Jacob Jenne",
   "license": "ISC"
